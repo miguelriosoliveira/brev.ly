@@ -20,7 +20,7 @@ jobs:
 
       - name: Commit updated submodules (if needed)
         env:
-          PUSH_TOKEN: ${{ secrets.PAT_FOR_META_PUSH }}
+          PUSH_TOKEN: ${{ secrets.BREVLY_REPO_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
