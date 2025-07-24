@@ -19,13 +19,15 @@ jobs:
           git submodule update --remote
 
       - name: Commit updated submodules (if needed)
+        env:
+          PUSH_TOKEN: ${{ secrets.PAT_FOR_META_PUSH }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           if [[ -n "$(git status --porcelain)" ]]; then
             git add .
             git commit -m "chore: update submodules to latest commit"
-            git push
+            git push https://x-access-token:$PUSH_TOKEN@github.com/miguelriosoliveira/brev.ly.git
           else
             echo "No submodule updates to commit."
           fi
