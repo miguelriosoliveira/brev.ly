@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.BREVLY_REPO_TOKEN }}
 
       - name: Update submodules to latest commit on tracked branches
         run: |
