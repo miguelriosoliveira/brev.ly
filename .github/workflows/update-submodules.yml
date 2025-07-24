@@ -1,4 +1,4 @@
-name: Update submodules from webhook
+name: Update submodules
 
 on:
   workflow_dispatch:
@@ -8,17 +8,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repo with submodules
         uses: actions/checkout@v4
         with:
           submodules: recursive
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update submodules to latest commit
+      - name: Update submodules to latest commit on tracked branches
         run: |
-          git submodule update --remote --merge
+          git submodule update --remote
+
+      - name: Commit updated submodules (if needed)
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "chore: update submodules from trigger" || echo "No changes to commit"
-          git push
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add .
+            git commit -m "chore: update submodules to latest commit"
+            git push
+          else
+            echo "No submodule updates to commit."
+          fi

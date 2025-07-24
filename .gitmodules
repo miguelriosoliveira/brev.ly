@@ -1,6 +1,8 @@
 [submodule "server"]
 	path = server
-	url = https://github.com/miguelriosoliveira/brev.ly-server
+	url = https://github.com/miguelriosoliveira/brev.ly-server.git
+	branch = main
 [submodule "web"]
 	path = web
 	url = https://github.com/miguelriosoliveira/brev.ly-web.git
+	branch = main
